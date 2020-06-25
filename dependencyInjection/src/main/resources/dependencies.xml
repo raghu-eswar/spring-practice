@@ -4,4 +4,32 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="address" class="com.bridgelabz.Address" scope="prototype">
+        <constructor-arg value="city"/>
+        <constructor-arg value="state"/>
+        <constructor-arg value="zip code"/>
+    </bean>
+
+    <bean id="employee1" class="com.bridgelabz.Employee">
+        <constructor-arg value="employee1"/>
+        <constructor-arg value="xxxxxxxxx"/>
+        <constructor-arg ref="address"/>
+    </bean>
+
+    <bean id="employee2" class="com.bridgelabz.Employee">
+        <constructor-arg value="employee2"/>
+        <constructor-arg value="xxxxxxxxx"/>
+        <constructor-arg ref="address"/>
+    </bean>
+
+    <bean id="company" class="com.bridgelabz.Company" >
+        <constructor-arg value="bridgelabz"/>
+        <constructor-arg>
+            <list value-type="com.bridgelabz.Employee">
+                <ref bean="employee1"/>
+                <ref bean="employee2"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
 </beans>
