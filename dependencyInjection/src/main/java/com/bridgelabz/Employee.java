@@ -1,12 +1,21 @@
 package com.bridgelabz;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
+@Component
 public class Employee {
     private String name;
     private String phoneNo;
     private Address address;
     public Company company;
 
-    public Employee() {    }
+    public Employee(String name, String phoneNo) {
+        this.name = name;
+        this.phoneNo = phoneNo;
+    }
 
     public Employee(String name, String phoneNo, Address address) {
         this.name = name;
@@ -22,6 +31,7 @@ public class Employee {
         this.phoneNo = phoneNo;
     }
 
+    @Autowired
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -30,6 +40,7 @@ public class Employee {
         return name;
     }
 
+    @PostConstruct
     private void init() {
         this.address.employee = this;
     }
