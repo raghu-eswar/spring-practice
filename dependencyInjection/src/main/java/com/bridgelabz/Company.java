@@ -21,6 +21,14 @@ public class Company {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    private void init() {
+        this.employees.forEach(employee -> employee.company = this);
+    }
+
     @Override
     public String toString() {
         return "Company{" +

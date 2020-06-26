@@ -4,6 +4,7 @@ public class Address {
     private String city;
     private String state;
     private String zip;
+    public Employee employee;
 
     public Address() {    }
 
@@ -31,6 +32,7 @@ public class Address {
                 "city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip='" + zip + '\'' +
+                ", employee=" + employee.getName() +
                 '}';
     }
 }

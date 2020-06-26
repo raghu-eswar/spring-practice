@@ -4,6 +4,7 @@ public class Employee {
     private String name;
     private String phoneNo;
     private Address address;
+    public Company company;
 
     public Employee() {    }
 
@@ -25,12 +26,21 @@ public class Employee {
         this.address = address;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    private void init() {
+        this.address.employee = this;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
                 ", address=" + address +
+                ", company=" + company.getName() +
                 '}';
     }
 }

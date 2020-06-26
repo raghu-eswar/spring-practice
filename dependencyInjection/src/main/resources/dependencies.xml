@@ -10,19 +10,19 @@
         <property name="zip" value="zip"/>
     </bean>
 
-    <bean id="employee1" class="com.bridgelabz.Employee">
+    <bean id="employee1" class="com.bridgelabz.Employee" init-method="init">
         <property name="address" ref="address"/>
         <property name="name" value="employee1"/>
         <property name="phoneNo" value="11111111111"/>
     </bean>
 
-    <bean id="employee2" class="com.bridgelabz.Employee">
+    <bean id="employee2" class="com.bridgelabz.Employee" init-method="init">
         <property name="address" ref="address"/>
         <property name="name" value="employee2"/>
         <property name="phoneNo" value="2222222222"/>
     </bean>
 
-    <bean id="company" class="com.bridgelabz.Company" >
+    <bean id="company" class="com.bridgelabz.Company" init-method="init">
         <property name="name" value="bridgelabz"/>
         <property name="employees">
             <list value-type="com.bridgelabz.Employee">
