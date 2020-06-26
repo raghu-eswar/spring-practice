@@ -5,31 +5,31 @@
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="address" class="com.bridgelabz.Address" scope="prototype">
-        <constructor-arg value="city"/>
-        <constructor-arg value="state"/>
-        <constructor-arg value="zip code"/>
+        <property name="city" value="city"/>
+        <property name="state" value="state"/>
+        <property name="zip" value="zip"/>
     </bean>
 
     <bean id="employee1" class="com.bridgelabz.Employee">
-        <constructor-arg value="employee1"/>
-        <constructor-arg value="xxxxxxxxx"/>
-        <constructor-arg ref="address"/>
+        <property name="address" ref="address"/>
+        <property name="name" value="employee1"/>
+        <property name="phoneNo" value="11111111111"/>
     </bean>
 
     <bean id="employee2" class="com.bridgelabz.Employee">
-        <constructor-arg value="employee2"/>
-        <constructor-arg value="xxxxxxxxx"/>
-        <constructor-arg ref="address"/>
+        <property name="address" ref="address"/>
+        <property name="name" value="employee2"/>
+        <property name="phoneNo" value="2222222222"/>
     </bean>
 
     <bean id="company" class="com.bridgelabz.Company" >
-        <constructor-arg value="bridgelabz"/>
-        <constructor-arg>
+        <property name="name" value="bridgelabz"/>
+        <property name="employees">
             <list value-type="com.bridgelabz.Employee">
                 <ref bean="employee1"/>
                 <ref bean="employee2"/>
             </list>
-        </constructor-arg>
+        </property>
     </bean>
 
 </beans>

@@ -6,8 +6,18 @@ public class Company {
     public List<Employee> employees;
     public String name;
 
+    public Company() {    }
+
     public Company(String name, List<Employee> employees) {
         this.employees = employees;
+        this.name = name;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
