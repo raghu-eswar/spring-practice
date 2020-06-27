@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -11,9 +12,7 @@ public class Company {
     public List<Employee> employees;
     public String name;
 
-    public Company(String name) {
-        this.name = name;
-    }
+    public Company() { }
 
     public Company(String name, List<Employee> employees) {
         this.employees = employees;
@@ -25,6 +24,7 @@ public class Company {
         this.employees = employees;
     }
 
+    @Value("bridgelabz")
     public void setName(String name) {
         this.name = name;
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public class AppConfig {
     @Bean(name = "company")
     public Company getCompany() {
-        return new Company("bridglabz");
+        return new Company();
     }
 
     @Bean(name = "employees")
