@@ -3,7 +3,7 @@
 
 <head>
     <title>Profile</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/views/styles/styles.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/styles/styles.css">
 </head>
 
 <body>

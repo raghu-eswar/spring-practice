@@ -3,9 +3,9 @@
 
 <head>
     <title>Home</title>
-    <link rel="stylesheet" href="./views/styles/styles.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="./views/script/script.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/script/script.js"></script>
 </head>
 
 <header>
