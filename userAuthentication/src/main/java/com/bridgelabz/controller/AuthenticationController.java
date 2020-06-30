@@ -44,4 +44,15 @@ public class AuthenticationController {
         return new ModelAndView("redirect:Home", "error", "user name or password is incorrect");
     }
 
+    @RequestMapping(value = "/UpdateProfile", method = RequestMethod.GET)
+    public ModelAndView updateUser(@ModelAttribute User newUser, @SessionAttribute("user") User user) {
+        boolean updateStatus = UserDao.updateUser(newUser, user);
+        if (updateStatus) {
+            user.setFirstName(newUser.getFirstName());
+            user.setLastName(newUser.getLastName());
+            user.setEmail(newUser.getEmail());
+        }
+        return new ModelAndView("profile");
+    }
+
 }

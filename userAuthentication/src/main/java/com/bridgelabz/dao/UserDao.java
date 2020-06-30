@@ -11,6 +11,7 @@ public class UserDao {
     private static final JdbcTemplate jdbcTemplate = new JdbcTemplate();
     private static final String ADD_USER_STATEMENT = "insert into userInfo values(?, ?, ?, ?, ?)";
     private static final String SELECT_USER_STATEMENT = "select * from userInfo where emailId=? and password=?";
+    private static final String UPDATE_USER_STATEMENT = "update userInfo set firstName =?, lastName = ?, emailId = ? where id = ?";
 
     static {
         ApplicationContext context = new ClassPathXmlApplicationContext("dependencies.xml");
@@ -28,4 +29,9 @@ public class UserDao {
         return jdbcTemplate.query(SELECT_USER_STATEMENT, new Object[]{email, password}, new UserExtractor());
     }
 
+    public static boolean updateUser(User newUser, User user) {
+        int updatedRows = jdbcTemplate.update(UPDATE_USER_STATEMENT, newUser.getFirstName(),
+                                                newUser.getLastName(), newUser.getEmail(), user.getId());
+        return updatedRows == 1;
+    }
 }

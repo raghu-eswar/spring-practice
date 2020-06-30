@@ -150,6 +150,11 @@ a:active,
     pointer-events: none;
 }
 
+.user-info-submit-button {
+    width: 150px;
+    margin-left: 35%;
+}
+
 #user-info>form>h2 {
     margin-left: 40%;
 }
