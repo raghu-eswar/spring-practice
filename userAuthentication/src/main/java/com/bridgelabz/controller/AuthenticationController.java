@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@SessionAttributes("user")
 public class AuthenticationController {
 
     @RequestMapping("/Home")
@@ -31,6 +32,16 @@ public class AuthenticationController {
             return new ModelAndView("redirect:SignUp", "error", "email all ready in use");
 
         }
+    }
+
+    @RequestMapping(value = "/Profile", method = RequestMethod.POST)
+    public ModelAndView validateUser(@RequestParam("email") String email,
+                                     @RequestParam("password") String password) {
+        User user = UserDao.createUser(email, password);
+        if (user != null) {
+            return new ModelAndView("profile", "user", user);
+        }
+        return new ModelAndView("redirect:Home", "error", "user name or password is incorrect");
     }
 
 }

@@ -26,12 +26,26 @@
             <%}%>
     </div>
     <div id="login">
-        <form method="POST" action="">
+        <form method="POST" action="Profile">
             <h2>LOGIN</h2>
             <div id="lock-icon"><i class="fa fa-lock"></i></div>
-            <div class="form-input"><input type="email" name="email" placeholder="Email" class="form-input-field" required></div>
-            <div class="form-input"><input type="password" name="password" placeholder="Password" class="form-input-field" required></div>
-            <div id="error-message"></div>
+            <div class="form-input">
+                <input type="email" name="email" placeholder="Email" class="form-input-field" required
+                       pattern="^([a-zA-Z]+[a-zA-Z0-9\.-]+[a-zA-Z0-9]+)@([a-zA-Z]+).([a-z]){2,3}(.[a-z]{2,3})?$"
+                       title="should be like --user name--@--domine name--">
+            </div>
+            <div class="form-input">
+                <input type="password" name="password" placeholder="Password" class="form-input-field"  required
+                       pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{5,}$"
+                       title="must have at least 1 symbol and 1 number and 1 capital letter  ">
+            </div>
+            <div id="error-message">
+                <%
+                    if (request.getParameter("error") != null) {
+                %>
+                <%=request.getParameter("error")%>
+                <%}%>
+            </div>
             <div class="form-input"><input type="submit" value="Log in" class="form-submit-button"></div>
         </form>
     </div>

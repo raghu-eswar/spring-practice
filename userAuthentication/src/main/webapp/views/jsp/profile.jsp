@@ -18,7 +18,14 @@
 </header>
 
 <main>
-
+    <div id="user-info">
+        <form action="">
+            <h2>PROFILE</h2>
+            <div class="form-input"><label>First Name</label><input type="text" value=${user.firstName} name="FirstName" placeholder="Email" class="blocked-input-field"></div>
+            <div class="form-input"><label>Last Name</label><input type="text" value=${user.lastName} name="LastName" placeholder="Email" class="blocked-input-field"></div>
+            <div class="form-input"><label>Email id</label><input type="text" value=${user.email} name="email" placeholder="Email" class="blocked-input-field"></div>
+        </form>
+    </div>
 </main>
 
 </body>

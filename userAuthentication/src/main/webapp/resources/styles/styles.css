@@ -120,3 +120,36 @@ a:active,
     font-size: 25px;
     color: green;
 }
+
+#user-info {
+    width: 550px;
+    height: 400px;
+    text-align: justify;
+    box-shadow: -1px 2px 8px 0 rgba(0, 0, 0, 0.2), 1px 0px 15px 0 rgba(0, 0, 0, 0.15);
+    margin: 15px 0 0 420px;
+    padding-top: 10px;
+}
+
+#user-info>form>div>label {
+    display: inline-block;
+    margin-left: 45px;
+    width: 150px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.blocked-input-field {
+    width: 350px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    text-align: start;
+    background-color: transparent;
+    outline: none;
+    pointer-events: none;
+}
+
+#user-info>form>h2 {
+    margin-left: 40%;
+}
