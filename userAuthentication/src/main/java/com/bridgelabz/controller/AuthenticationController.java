@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @SessionAttributes("user")
 public class AuthenticationController {
@@ -21,7 +23,14 @@ public class AuthenticationController {
         return new ModelAndView("signUp");
     }
 
-    @RequestMapping("/AddUser")
+    @RequestMapping("/Profile")
+    public ModelAndView reDirectToProfilePage(HttpSession session) {
+        if (session.getAttribute("user") != null)
+            return new ModelAndView("profile");
+        return new ModelAndView("redirect:Home");
+    }
+
+    @RequestMapping(value = "/AddUser", method = RequestMethod.POST)
     public ModelAndView addNewUser(@ModelAttribute User user) {
         try {
             boolean signUpStatus = UserDao.addNewUser(user);
@@ -34,17 +43,16 @@ public class AuthenticationController {
         }
     }
 
-    @RequestMapping(value = "/Profile", method = RequestMethod.POST)
+    @RequestMapping(value = "/Validate", method = RequestMethod.POST)
     public ModelAndView validateUser(@RequestParam("email") String email,
                                      @RequestParam("password") String password) {
         User user = UserDao.createUser(email, password);
-        if (user != null) {
-            return new ModelAndView("profile", "user", user);
-        }
+        if (user != null)
+            return new ModelAndView("redirect:Profile", "user", user);
         return new ModelAndView("redirect:Home", "error", "user name or password is incorrect");
     }
 
-    @RequestMapping(value = "/UpdateProfile", method = RequestMethod.GET)
+    @RequestMapping(value = "/UpdateProfile", method = RequestMethod.POST)
     public ModelAndView updateUser(@ModelAttribute User newUser, @SessionAttribute("user") User user) {
         boolean updateStatus = UserDao.updateUser(newUser, user);
         if (updateStatus) {
@@ -52,7 +60,7 @@ public class AuthenticationController {
             user.setLastName(newUser.getLastName());
             user.setEmail(newUser.getEmail());
         }
-        return new ModelAndView("profile");
+        return new ModelAndView("redirect:Profile");
     }
 
 }

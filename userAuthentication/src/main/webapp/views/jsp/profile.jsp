@@ -9,11 +9,6 @@
 </head>
 
 <body>
-    <%
-        User user = (User) session.getAttribute("user");
-        if (user == null)
-            response.sendRedirect("Home");
-    %>
 
 <header>
     <div>
@@ -26,7 +21,7 @@
 
 <main>
     <div id="user-info">
-        <form action="UpdateProfile" method="GET">
+        <form action="UpdateProfile" method="POST">
             <h2>PROFILE</h2>
             <div class="form-input"><label>First Name</label><input type="text" value=${user.firstName} name="FirstName" placeholder="Email" class="blocked-input-field"></div>
             <div class="form-input"><label>Last Name</label><input type="text" value=${user.lastName} name="LastName" placeholder="Email" class="blocked-input-field"></div>

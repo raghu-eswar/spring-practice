@@ -26,7 +26,7 @@
             <%}%>
     </div>
     <div id="login">
-        <form method="POST" action="Profile">
+        <form method="POST" action="Validate">
             <h2>LOGIN</h2>
             <div id="lock-icon"><i class="fa fa-lock"></i></div>
             <div class="form-input">
