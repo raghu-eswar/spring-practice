@@ -1,3 +1,4 @@
+<%@ page import="com.bridgelabz.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -7,6 +8,11 @@
 </head>
 
 <body>
+    <%
+        User user = (User) session.getAttribute("user");
+        if (user == null)
+            response.sendRedirect("Home");
+    %>
 
 <header>
     <div>
