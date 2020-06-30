@@ -36,7 +36,8 @@ header {
 main {
     width: auto;
     height: 507px;
-    padding-top: 50px;
+    padding-top: 35px;
+    text-align: center;
 }
 
 #login {
@@ -111,4 +112,11 @@ a:active,
     height: 10px;
     margin: 5px;
     color: red;
+}
+
+.success-message {
+    height: 40px;
+    margin: 10px;
+    font-size: 25px;
+    color: green;
 }
