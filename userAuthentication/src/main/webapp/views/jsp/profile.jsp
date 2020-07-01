@@ -15,11 +15,13 @@
         <h1>WELCOME</h1>
     </div>
     <div>
-        <div><a href="">Log out</a></div>
+        <div><a href="LogOut">Log out</a></div>
     </div>
 </header>
 
 <main>
+    <%  response.setHeader("Cache-Control", "no-store");%>
+    ${userId}
     <div id="user-info">
         <form action="UpdateProfile" method="POST">
             <h2>PROFILE</h2>
