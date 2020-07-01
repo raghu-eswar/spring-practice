@@ -12,7 +12,7 @@
     <div>
         <h1>WELCOME</h1>
     </div>
-    <div><a href="">Log in</a></div>
+    <div><a href="Home">Log in</a></div>
 </header>
 
 <main>
