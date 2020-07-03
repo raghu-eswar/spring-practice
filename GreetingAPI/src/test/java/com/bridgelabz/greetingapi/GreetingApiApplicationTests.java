@@ -45,14 +45,14 @@ class GreetingApiApplicationTests {
     @Test
     void givenCurlCommandWithUrlEndPointAsUser_GreetingAPI_shouldGreetUser() {
         try {
-            Process process = Runtime.getRuntime().exec("curl http://localhost:8080/hello/user?name=RAGHU");
+            Process process = Runtime.getRuntime().exec("curl http://localhost:8080/hello/user?firstName=RAGHU&lastName");
             String result = "";
             Scanner scanner = new Scanner(process.getInputStream());
             scanner.useDelimiter("\r\n");
             while (scanner.hasNext())
                 result = result+scanner.next();
             scanner.close();
-            Assert.check(result.equals("Hello RAGHU ..."));
+            Assert.check(result.equals("Hello RAGHU  ..."));
         } catch (IOException e) {
             e.printStackTrace();
         }

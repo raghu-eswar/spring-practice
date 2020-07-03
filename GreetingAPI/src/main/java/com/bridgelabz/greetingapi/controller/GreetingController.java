@@ -1,9 +1,6 @@
 package com.bridgelabz.greetingapi.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("hello")
@@ -15,8 +12,9 @@ public class GreetingController {
     }
 
     @GetMapping("user")
-    public String sayHello(@RequestParam(value = "name") String name) {
-        return "Hello "+name+" ...";
+    public String sayHelloUsingParameters(@RequestParam(value = "firstName") String firstName,
+                                          @RequestParam(value = "lastName") String lastName) {
+        return "Hello "+firstName+" "+lastName+" ...";
     }
 
 }
