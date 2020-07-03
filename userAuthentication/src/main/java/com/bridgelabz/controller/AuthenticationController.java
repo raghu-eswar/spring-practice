@@ -57,7 +57,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/Validate", method = RequestMethod.POST)
     public ModelAndView validateUser(@RequestParam("email") String email, @RequestParam("password") String password,
-                                        HttpServletResponse response, HttpSession session) {
+                                     HttpServletResponse response) {
         User user = UserDao.createUser(email, password);
         if (user != null) {
             Cookie cookie = new Cookie("authentication_user",  new String(Base64.getEncoder().encode(Integer.toString(user.getId()).getBytes())));
