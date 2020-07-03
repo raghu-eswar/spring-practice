@@ -17,4 +17,9 @@ public class GreetingController {
         return "Hello "+firstName+" "+lastName+" ...";
     }
 
+    @GetMapping("user/{firstName}/{lastName}")
+    public String sayHelloUsingPath(@PathVariable String firstName, @PathVariable String lastName) {
+        return "Hello "+firstName+" "+lastName+" ...";
+    }
+
 }

@@ -58,4 +58,21 @@ class GreetingApiApplicationTests {
         }
     }
 
+    @Test
+    void givenCurlCommandWithUrlEndPointAsUserName_GreetingAPI_shouldGreetUser() {
+        try {
+            Process process = Runtime.getRuntime().exec("curl http://localhost:8080/hello/user/RAGHU/ESWAR");
+            String result = "";
+            Scanner scanner = new Scanner(process.getInputStream());
+            scanner.useDelimiter("\r\n");
+            while (scanner.hasNext())
+                result = result+scanner.next();
+            scanner.close();
+            System.out.println(result);
+            Assert.check(result.equals("Hello RAGHU ESWAR ..."));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
