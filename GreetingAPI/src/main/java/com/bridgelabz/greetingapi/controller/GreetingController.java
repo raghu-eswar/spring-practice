@@ -1,25 +1,23 @@
 package com.bridgelabz.greetingapi.controller;
 
-import org.springframework.web.bind.annotation.*;
+import com.bridgelabz.greetingapi.model.Message;
+import com.bridgelabz.greetingapi.model.User;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("hello")
 public class GreetingController {
 
-    @RequestMapping(value = {"", "home"})
-    public String sayHello() {
-        return "Hello World!...";
-    }
-
-    @GetMapping("user")
-    public String greetUserInParameters(@RequestParam(value = "firstName") String firstName,
-                                          @RequestParam(value = "lastName") String lastName) {
-        return "Hello "+firstName+" "+lastName+" ...";
-    }
-
-    @GetMapping("user/{firstName}/{lastName}")
-    public String greetUserInPath(@PathVariable String firstName, @PathVariable String lastName) {
-        return "Hello "+firstName+" "+lastName+" ...";
+    @PostMapping("user")
+    public Message greetUser(@RequestBody User user) {
+        Message message = new Message();
+        message.setId(user.getId());
+        message.setMessage("Hello");
+        message.setUser(user);
+        return message;
     }
 
 }
