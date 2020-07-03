@@ -36,12 +36,26 @@ class GreetingApiApplicationTests {
             while (scanner.hasNext())
                 result = result+scanner.next();
             scanner.close();
-            System.out.println(result);
             Assert.check(result.equals("Hello World!..."));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @Test
+    void givenCurlCommandWithUrlEndPointAsUser_GreetingAPI_shouldGreetUser() {
+        try {
+            Process process = Runtime.getRuntime().exec("curl http://localhost:8080/hello/user?name=RAGHU");
+            String result = "";
+            Scanner scanner = new Scanner(process.getInputStream());
+            scanner.useDelimiter("\r\n");
+            while (scanner.hasNext())
+                result = result+scanner.next();
+            scanner.close();
+            Assert.check(result.equals("Hello RAGHU ..."));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
