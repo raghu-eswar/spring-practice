@@ -1,5 +1,6 @@
 package com.bridgelabz.greetingapi.controller;
 
+import com.bridgelabz.greetingapi.model.Greeting;
 import com.bridgelabz.greetingapi.model.Message;
 import com.bridgelabz.greetingapi.model.User;
 import com.bridgelabz.greetingapi.service.GreetingApiService;
@@ -26,8 +27,8 @@ public class GreetingController {
     }
 
     @PostMapping("AddGreeting")
-    public Integer addGreeting(@RequestBody Message message) {
-        return greetingApiService.addGreeting(message.getUser(), message);
+    public Integer addGreeting(@RequestBody Greeting greeting) {
+        return greetingApiService.addGreeting(greeting.getUser(), greeting.getMessage());
     }
 
 }
