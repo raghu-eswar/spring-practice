@@ -1,8 +1,6 @@
 package com.bridgelabz.greetingapi.dao.impl;
 
 import com.bridgelabz.greetingapi.dao.GreetingDao;
-import com.bridgelabz.greetingapi.dao.MessageDao;
-import com.bridgelabz.greetingapi.dao.UserDao;
 import com.bridgelabz.greetingapi.model.Greeting;
 import com.bridgelabz.greetingapi.service.MessageService;
 import com.bridgelabz.greetingapi.service.UserService;
@@ -44,6 +42,17 @@ public class GreetingDaoImpl extends JdbcDaoSupport implements GreetingDao {
 
     @Override
     public Greeting getGreeting(int greetingId) {
-        return null;
+        String sql = "SELECT * FROM greetings WHERE greeting_id = ?";
+        Greeting greeting = getJdbcTemplate().query(sql, new Object[]{greetingId}, rs -> {
+            Greeting greeting1 = new Greeting();
+            if (rs.next()) {
+                greeting1.setId(greetingId);
+                greeting1.setUser(userService.getUser(rs.getInt("user_id")));
+                greeting1.setMessage(messageService.getMessage(rs.getInt("messages_id")));
+                return greeting1;
+            }
+            return null;
+        });
+        return greeting;
     }
 }

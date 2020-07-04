@@ -18,4 +18,9 @@ public class GreetingApiServiceImpl implements GreetingApiService {
     public Integer addGreeting(Greeting greeting) {
         return greetingDao.addGreeting(greeting);
     }
+
+    @Override
+    public Greeting getGreeting(int greetingId) {
+        return greetingDao.getGreeting(greetingId);
+    }
 }

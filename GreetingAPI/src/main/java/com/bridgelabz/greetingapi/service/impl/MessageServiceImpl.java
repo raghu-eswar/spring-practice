@@ -16,4 +16,9 @@ public class MessageServiceImpl implements MessageService {
     public Integer addMessage(Message message) {
         return messageDao.addMessage(message);
     }
+
+    @Override
+    public Message getMessage(int messageId) {
+        return messageDao.getMessage(messageId);
+    }
 }
