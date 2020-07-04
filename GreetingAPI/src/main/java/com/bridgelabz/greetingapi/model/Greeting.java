@@ -1,8 +1,17 @@
 package com.bridgelabz.greetingapi.model;
 
 public class Greeting {
+    private int id;
     private Message message;
     private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Message getMessage() {
         return message;

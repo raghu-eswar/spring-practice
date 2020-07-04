@@ -21,9 +21,9 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
 
     @Override
     public Integer addMessage(Message message) {
-        String sql = "INSERT INTO messages VALUES (?, ?,?, default, default)";
+        String sql = "INSERT INTO messages VALUES (?, ?, default, default)";
         Integer user_id = getJdbcTemplate().query("SELECT LAST_INSERT_ID()", rs -> (rs.next()) ? rs.getInt("LAST_INSERT_ID()") : null);
-        getJdbcTemplate().update(sql, message.getId(), message.getMessage(), user_id);
+        getJdbcTemplate().update(sql, message.getId(), message.getMessage());
         return getJdbcTemplate().query("SELECT LAST_INSERT_ID()", rs -> {
             rs.next();
             return rs.getInt("LAST_INSERT_ID()");

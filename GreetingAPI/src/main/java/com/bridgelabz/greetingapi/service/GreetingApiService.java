@@ -1,9 +1,8 @@
 package com.bridgelabz.greetingapi.service;
 
-import com.bridgelabz.greetingapi.model.Message;
-import com.bridgelabz.greetingapi.model.User;
+import com.bridgelabz.greetingapi.model.Greeting;
 
 public interface GreetingApiService {
 
-    Integer addGreeting(User user, Message message);
+    Integer addGreeting(Greeting greeting);
 }
