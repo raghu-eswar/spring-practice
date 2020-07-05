@@ -2,6 +2,7 @@ package com.bridgelabz.greetingapi.dao.impl;
 
 import com.bridgelabz.greetingapi.dao.MessageDao;
 import com.bridgelabz.greetingapi.dao.UserDao;
+import com.bridgelabz.greetingapi.exceptions.UserNotFoundException;
 import com.bridgelabz.greetingapi.model.User;
 import com.bridgelabz.greetingapi.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,9 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
     public User getUser(int userId) {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         return getJdbcTemplate().query(sql, new Object[]{userId}, rs -> {
+            if (!rs.next())
+                throw new UserNotFoundException(userId);
             User user = new User();
-            rs.next();
             user.setId(rs.getInt("user_id"));
             user.setFirstName(rs.getString("first_name"));
             user.setLastName(rs.getString("last_name"));
