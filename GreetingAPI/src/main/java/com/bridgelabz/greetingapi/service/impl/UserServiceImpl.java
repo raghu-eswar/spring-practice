@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
             newUser.setId(user.getId());
             return userDao.updateUser(newUser);
         }
-        return newUser;
+        return user;
+    }
+
+    @Override
+    public User deleteUser(int userId) {
+        return userDao.deleteUser(userId);
     }
 }

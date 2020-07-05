@@ -47,4 +47,11 @@ public class GreetingApiServiceImpl implements GreetingApiService {
         }
         return new Greeting(message, user);
     }
+
+    @Override
+    public Greeting deleteGreeting(int userId) {
+        User user = userService.deleteUser(userId);
+        Message message = messageService.deleteMessage(user.getMessageId());
+        return new Greeting(message, user);
+    }
 }

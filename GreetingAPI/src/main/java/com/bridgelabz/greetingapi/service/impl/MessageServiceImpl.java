@@ -28,4 +28,10 @@ public class MessageServiceImpl implements MessageService {
             return messageDao.updateMessage(message.getId(), newMessage);
         return message;
     }
+
+    @Override
+    public Message deleteMessage(int messageId) {
+        Message message = messageDao.deleteMessage(messageId);
+        return (message == null)? messageDao.getMessage(messageId): message;
+    }
 }

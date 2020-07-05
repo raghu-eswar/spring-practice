@@ -9,4 +9,6 @@ public interface MessageDao {
     Message getMessage(int messageId);
 
     Message updateMessage(int messageId, Message message);
+
+    Message deleteMessage(int messageId);
 }

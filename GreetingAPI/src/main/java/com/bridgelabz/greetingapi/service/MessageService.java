@@ -9,4 +9,6 @@ public interface MessageService {
     Message getMessage(int messageId);
 
     Message updateMessage(Message message, Message newMessage);
+
+    Message deleteMessage(int messageId);
 }

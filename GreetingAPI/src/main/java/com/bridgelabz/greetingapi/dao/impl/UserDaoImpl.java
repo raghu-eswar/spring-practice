@@ -58,6 +58,14 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
         return newUser;
     }
 
+    @Override
+    public User deleteUser(int userId) {
+        User user = getUser(userId);
+        String deleteQuery = "DELETE FROM users WHERE user_id = ?";
+        getJdbcTemplate().update(deleteQuery, userId);
+        return user;
+    }
+
     private Integer  getLastInsertId() {
         return getJdbcTemplate().query("SELECT LAST_INSERT_ID()", rs -> {
             rs.next();

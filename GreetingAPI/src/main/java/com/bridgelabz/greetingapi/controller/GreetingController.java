@@ -22,9 +22,14 @@ public class GreetingController {
         return greetingApiService.addGreeting(greeting);
     }
 
-    @PostMapping("updateGreeting/{userId}")
+    @PutMapping("updateGreeting/{userId}")
     public Greeting updateGreeting(@RequestBody Greeting greeting, @PathVariable("userId") int userId) {
         return greetingApiService.updateGreeting(greeting, userId);
+    }
+
+    @DeleteMapping("deleteGreeting/{userId}")
+    public Greeting deleteGreeting(@PathVariable("userId") int userId) {
+        return greetingApiService.deleteGreeting(userId);
     }
 
 }

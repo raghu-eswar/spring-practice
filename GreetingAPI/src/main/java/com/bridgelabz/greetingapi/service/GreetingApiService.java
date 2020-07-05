@@ -9,4 +9,6 @@ public interface GreetingApiService {
     Greeting getGreeting(int greetingId);
 
     Greeting updateGreeting(Greeting greeting, int userId);
+
+    Greeting deleteGreeting(int userId);
 }

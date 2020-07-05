@@ -66,6 +66,23 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
         }
     }
 
+    @Override
+    public Message deleteMessage(int messageId) {
+        String sql = "SELECT COUNT(*) FROM users WHERE message_id = ?";
+        Integer noOfRecords = getJdbcTemplate().query(sql, new Object[]{messageId}, rs -> {
+            rs.next();
+            return rs.getInt(1);
+        });
+        System.out.println(noOfRecords+"................................");
+        if (noOfRecords < 1) {
+            String deleteQuery = "DELETE FROM messages WHERE message_id = ?";
+            Message message = getMessage(messageId);
+            getJdbcTemplate().update(deleteQuery, messageId);
+            return message;
+        }
+        return null;
+    }
+
     private Integer getMessageId(String message) {
         String selectQuery = "SELECT * FROM messages WHERE message = ?";
         return getJdbcTemplate().query(selectQuery, new Object[]{message}, rs -> {
