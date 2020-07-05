@@ -39,13 +39,14 @@ public class GreetingApiServiceImpl implements GreetingApiService {
     public Greeting updateGreeting(Greeting greeting, int userId) {
         User user = userService.getUser(userId);
         Message message = messageService.getMessage(user.getMessageId());
-        message = messageService.updateMessage(message, greeting.getMessage());
+        Message newMessage = messageService.updateMessage(message, greeting.getMessage());
         User newUser = greeting.getUser();
         if (newUser != null) {
-            newUser.setMessageId(message.getId());
+            newUser.setMessageId(newMessage.getId());
             user = userService.updateUser(user, newUser);
+            messageService.deleteMessage(message.getId());
         }
-        return new Greeting(message, user);
+        return new Greeting(newMessage, user);
     }
 
     @Override

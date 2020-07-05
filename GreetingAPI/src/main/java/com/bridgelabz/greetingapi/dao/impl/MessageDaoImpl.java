@@ -73,7 +73,6 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
             rs.next();
             return rs.getInt(1);
         });
-        System.out.println(noOfRecords+"................................");
         if (noOfRecords < 1) {
             String deleteQuery = "DELETE FROM messages WHERE message_id = ?";
             Message message = getMessage(messageId);
