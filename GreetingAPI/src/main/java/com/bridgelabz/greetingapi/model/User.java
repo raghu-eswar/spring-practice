@@ -4,6 +4,15 @@ public class User {
     private int id;
     private String firstName;
     private String lastName;
+    private int messageId;
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
 
     public int getId() {
         return id;

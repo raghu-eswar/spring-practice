@@ -3,15 +3,12 @@ package com.bridgelabz.greetingapi.dao.impl;
 import com.bridgelabz.greetingapi.dao.MessageDao;
 import com.bridgelabz.greetingapi.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Repository
 public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
@@ -25,27 +22,37 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
 
     @Override
     public Integer addMessage(Message message) {
-        String sql = "INSERT INTO messages VALUES (?, ?, default, default)";
-        Integer user_id = getJdbcTemplate().query("SELECT LAST_INSERT_ID()", rs -> (rs.next()) ? rs.getInt("LAST_INSERT_ID()") : null);
-        getJdbcTemplate().update(sql, message.getId(), message.getMessage());
+
+        String insertQuery = "INSERT INTO messages VALUES (?, ?, default, default)";
+        try {
+            getJdbcTemplate().update(insertQuery, message.getId(), message.getMessage());
+        }catch (DuplicateKeyException exception) {
+            String selectQuery = "SELECT * FROM messages WHERE message = ?";
+            return getJdbcTemplate().query(selectQuery, new Object[]{message.getMessage()}, rs -> {
+                rs.next();
+                return rs.getInt("message_id");
+            });
+        }
+        return getLastInsertId();
+    }
+
+    @Override
+    public Message getMessage(int messageId) {
+        String sql = "SELECT * FROM messages WHERE message_id = ?";
+        return getJdbcTemplate().query(sql, new Object[]{messageId}, rs -> {
+            Message message = new Message();
+            rs.next();
+            message.setId(rs.getInt("message_id"));
+            message.setMessage(rs.getString("message"));
+            return message;
+        });
+    }
+
+    private Integer  getLastInsertId() {
         return getJdbcTemplate().query("SELECT LAST_INSERT_ID()", rs -> {
             rs.next();
             return rs.getInt("LAST_INSERT_ID()");
         });
     }
 
-    @Override
-    public Message getMessage(int messageId) {
-        String sql = "SELECT * FROM messages WHERE messages_id = ?";
-        return getJdbcTemplate().query(sql, new Object[]{messageId}, new ResultSetExtractor<Message>() {
-            @Override
-            public Message extractData(ResultSet rs) throws SQLException, DataAccessException {
-                Message message = new Message();
-                rs.next();
-                message.setId(rs.getInt("messages_id"));
-                message.setMessage(rs.getString("messages"));
-                return message;
-            }
-        });
-    }
 }

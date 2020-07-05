@@ -12,9 +12,9 @@ public class GreetingController {
     @Autowired
     GreetingApiService greetingApiService;
 
-    @GetMapping("GetGreeting/{greetingId}")
-    public Greeting getGreeting(@PathVariable("greetingId") int greetingId) {
-        return greetingApiService.getGreeting(greetingId);
+    @GetMapping("GetGreeting/{userId}")
+    public Greeting getGreeting(@PathVariable("userId") int userId) {
+        return greetingApiService.getGreeting(userId);
     }
 
     @PostMapping("AddGreeting")

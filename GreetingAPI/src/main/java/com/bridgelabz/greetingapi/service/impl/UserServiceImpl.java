@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public Integer addUser(User user) {
-        return userDao.addUser(user);
+    public Integer addUser(User user, int messageId) {
+        return userDao.addUser(user, messageId);
     }
 
     @Override
