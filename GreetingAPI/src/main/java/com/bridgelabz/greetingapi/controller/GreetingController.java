@@ -18,8 +18,13 @@ public class GreetingController {
     }
 
     @PostMapping("AddGreeting")
-    public Integer addGreeting(@RequestBody Greeting greeting) {
+    public Greeting addGreeting(@RequestBody Greeting greeting) {
         return greetingApiService.addGreeting(greeting);
+    }
+
+    @PostMapping("updateGreeting/{userId}")
+    public Greeting updateGreeting(@RequestBody Greeting greeting, @PathVariable("userId") int userId) {
+        return greetingApiService.updateGreeting(greeting, userId);
     }
 
 }

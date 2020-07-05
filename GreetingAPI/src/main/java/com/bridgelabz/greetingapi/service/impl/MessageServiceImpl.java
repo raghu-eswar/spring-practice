@@ -13,12 +13,19 @@ public class MessageServiceImpl implements MessageService {
     MessageDao messageDao;
 
     @Override
-    public Integer addMessage(Message message) {
+    public Message addMessage(Message message) {
         return messageDao.addMessage(message);
     }
 
     @Override
     public Message getMessage(int messageId) {
         return messageDao.getMessage(messageId);
+    }
+
+    @Override
+    public Message updateMessage(Message message, Message newMessage) {
+        if (newMessage != null)
+            return messageDao.updateMessage(message.getId(), newMessage);
+        return message;
     }
 }

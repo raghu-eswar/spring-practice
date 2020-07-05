@@ -4,7 +4,9 @@ import com.bridgelabz.greetingapi.model.Greeting;
 
 public interface GreetingApiService {
 
-    Integer addGreeting(Greeting greeting);
+    Greeting addGreeting(Greeting greeting);
 
     Greeting getGreeting(int greetingId);
+
+    Greeting updateGreeting(Greeting greeting, int userId);
 }

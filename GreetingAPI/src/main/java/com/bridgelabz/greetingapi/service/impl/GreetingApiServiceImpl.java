@@ -21,15 +21,30 @@ public class GreetingApiServiceImpl implements GreetingApiService {
 
     @Override
     @Transactional
-    public Integer addGreeting(Greeting greeting) {
-        Integer messageId = messageService.addMessage(greeting.getMessage());
-        return userService.addUser(greeting.getUser(), messageId);
+    public Greeting addGreeting(Greeting greeting) {
+        Message message = messageService.addMessage(greeting.getMessage());
+        User user = userService.addUser(greeting.getUser(), message.getId());
+        return new Greeting(message, user);
     }
 
     @Override
     public Greeting getGreeting(int userId) {
         User user = userService.getUser(userId);
         Message message = messageService.getMessage(user.getMessageId());
+        return new Greeting(message, user);
+    }
+
+    @Override
+    @Transactional
+    public Greeting updateGreeting(Greeting greeting, int userId) {
+        User user = userService.getUser(userId);
+        Message message = messageService.getMessage(user.getMessageId());
+        message = messageService.updateMessage(message, greeting.getMessage());
+        User newUser = greeting.getUser();
+        if (newUser != null) {
+            newUser.setMessageId(message.getId());
+            user = userService.updateUser(user, newUser);
+        }
         return new Greeting(message, user);
     }
 }

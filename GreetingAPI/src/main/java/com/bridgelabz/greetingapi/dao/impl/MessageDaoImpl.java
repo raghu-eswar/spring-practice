@@ -21,19 +21,17 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
     }
 
     @Override
-    public Integer addMessage(Message message) {
+    public Message addMessage(Message message) {
 
         String insertQuery = "INSERT INTO messages VALUES (?, ?, default, default)";
         try {
             getJdbcTemplate().update(insertQuery, message.getId(), message.getMessage());
         }catch (DuplicateKeyException exception) {
-            String selectQuery = "SELECT * FROM messages WHERE message = ?";
-            return getJdbcTemplate().query(selectQuery, new Object[]{message.getMessage()}, rs -> {
-                rs.next();
-                return rs.getInt("message_id");
-            });
+            message.setId(getMessageId(message.getMessage()));
+            return message;
         }
-        return getLastInsertId();
+        message.setId(getLastInsertId());
+        return message;
     }
 
     @Override
@@ -45,6 +43,34 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao {
             message.setId(rs.getInt("message_id"));
             message.setMessage(rs.getString("message"));
             return message;
+        });
+    }
+
+    @Override
+    public Message updateMessage(int messageId, Message message) {
+        String sql = "SELECT COUNT(*) FROM users WHERE message_id = ?";
+        Integer noOfRecords = getJdbcTemplate().query(sql, new Object[]{messageId}, rs -> {
+            rs.next();
+            return rs.getInt(1);
+        });
+        if (noOfRecords > 1)
+            return addMessage(message);
+        try{
+            String updateQuery = "UPDATE messages SET message = ? WHERE message_id = ?";
+            getJdbcTemplate().update(updateQuery, message.getMessage(), messageId);
+            message.setId(messageId);
+            return message;
+        }catch (DuplicateKeyException exception) {
+            message.setId(getMessageId(message.getMessage()));
+            return message;
+        }
+    }
+
+    private Integer getMessageId(String message) {
+        String selectQuery = "SELECT * FROM messages WHERE message = ?";
+        return getJdbcTemplate().query(selectQuery, new Object[]{message}, rs -> {
+            rs.next();
+            return rs.getInt("message_id");
         });
     }
 

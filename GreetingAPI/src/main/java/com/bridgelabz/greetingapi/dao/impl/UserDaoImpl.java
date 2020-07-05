@@ -1,6 +1,5 @@
 package com.bridgelabz.greetingapi.dao.impl;
 
-import com.bridgelabz.greetingapi.dao.MessageDao;
 import com.bridgelabz.greetingapi.dao.UserDao;
 import com.bridgelabz.greetingapi.exceptions.UserNotFoundException;
 import com.bridgelabz.greetingapi.model.User;
@@ -28,10 +27,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
 
     @Override
-    public Integer addUser(User user, int messageId) {
+    public User addUser(User user, int messageId) {
         String sql = "INSERT INTO users VALUES (?, ?, ?, ?, default, default)";
         getJdbcTemplate().update(sql, user.getId(), user.getFirstName(), user.getLastName(), messageId);
-        return getLastInsertId();
+        user.setId(getLastInsertId());
+        user.setMessageId(messageId);
+        return user;
     }
 
     @Override
@@ -48,6 +49,13 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
             return user;
         });
 
+    }
+
+    @Override
+    public User updateUser(User newUser) {
+        String updateQuery = "UPDATE users SET first_name = ?, last_name = ?, message_id = ? WHERE user_id = ?";
+        getJdbcTemplate().update(updateQuery, newUser.getFirstName(), newUser.getLastName(), newUser.getMessageId(), newUser.getId());
+        return newUser;
     }
 
     private Integer  getLastInsertId() {

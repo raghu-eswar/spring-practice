@@ -4,7 +4,9 @@ import com.bridgelabz.greetingapi.model.Message;
 
 public interface MessageService {
 
-    Integer addMessage(Message message);
+    Message addMessage(Message message);
 
     Message getMessage(int messageId);
+
+    Message updateMessage(Message message, Message newMessage);
 }
