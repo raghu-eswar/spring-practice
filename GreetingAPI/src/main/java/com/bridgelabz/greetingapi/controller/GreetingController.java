@@ -12,22 +12,22 @@ public class GreetingController {
     @Autowired
     GreetingApiService greetingApiService;
 
-    @GetMapping("GetGreeting/{userId}")
+    @GetMapping("Get/{userId}")
     public Greeting getGreeting(@PathVariable("userId") int userId) {
         return greetingApiService.getGreeting(userId);
     }
 
-    @PostMapping("AddGreeting")
+    @PostMapping("Add")
     public Greeting addGreeting(@RequestBody Greeting greeting) {
         return greetingApiService.addGreeting(greeting);
     }
 
-    @PutMapping("updateGreeting/{userId}")
+    @PutMapping("update/{userId}")
     public Greeting updateGreeting(@RequestBody Greeting greeting, @PathVariable("userId") int userId) {
         return greetingApiService.updateGreeting(greeting, userId);
     }
 
-    @DeleteMapping("deleteGreeting/{userId}")
+    @DeleteMapping("delete/{userId}")
     public Greeting deleteGreeting(@PathVariable("userId") int userId) {
         return greetingApiService.deleteGreeting(userId);
     }
